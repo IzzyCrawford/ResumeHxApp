@@ -13,6 +13,8 @@ const Home: React.FC = () => {
                         <ul>
                             <li>React Frontend</li>
                             <li>.NET Backend</li>
+                            <li>TypeScript</li>
+                            <li>Postgres</li>
                             <li>Docker Support</li>
                             <li>Weather Forecast Demo</li>
                         </ul>

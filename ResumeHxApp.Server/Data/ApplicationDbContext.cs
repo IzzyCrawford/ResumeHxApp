@@ -11,6 +11,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Resume> Resumes { get; set; }
     public DbSet<JobHistory> JobHistories { get; set; }
+    public DbSet<JobResponsibility> JobResponsibilities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,8 +20,8 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Resume>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.FullName).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Email).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.FullName).IsRequired().HasMaxLength(20);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(20);
             entity.Property(e => e.Phone).HasMaxLength(20);
             entity.Property(e => e.Summary).HasMaxLength(2000);
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
@@ -30,10 +31,10 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<JobHistory>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.CompanyName).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.Location).HasMaxLength(200);
-            entity.Property(e => e.JobTitle).IsRequired().HasMaxLength(200);
-            entity.Property(e => e.TechStack).HasMaxLength(500);
+            entity.Property(e => e.CompanyName).IsRequired().HasMaxLength(150);
+            entity.Property(e => e.Location).HasMaxLength(150);
+            entity.Property(e => e.JobTitle).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.TechStack).HasMaxLength(1000);
             entity.Property(e => e.Summary).HasMaxLength(2000);
             entity.Property(e => e.StartDate).IsRequired();
             entity.Property(e => e.EndDate);
@@ -43,6 +44,15 @@ public class ApplicationDbContext : DbContext
             entity.HasOne<Resume>()
                   .WithMany()
                   .HasForeignKey(e => e.ResumeId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+        modelBuilder.Entity<JobResponsibility>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(2000);
+            entity.HasOne<JobHistory>()
+                  .WithMany()
+                  .HasForeignKey(e => e.JobHistoryId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
 

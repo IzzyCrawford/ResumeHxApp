@@ -130,3 +130,4 @@ c:\Users\Izzy-PC\source\repos\ResumeHxApp\ResumeHxApp.Server\obj\Release\net9.0\
 c:\Users\Izzy-PC\source\repos\ResumeHxApp\ResumeHxApp.Server\obj\Release\net9.0\ResumeHxApp.Server.pdb
 c:\Users\Izzy-PC\source\repos\ResumeHxApp\ResumeHxApp.Server\obj\Release\net9.0\ResumeHxApp.Server.genruntimeconfig.cache
 c:\Users\Izzy-PC\source\repos\ResumeHxApp\ResumeHxApp.Server\obj\Release\net9.0\ref\ResumeHxApp.Server.dll
+c:\Users\Izzy-PC\source\repos\ResumeHxApp\ResumeHxApp.Server\obj\Release\net9.0\ResumeHxApp.Server.sourcelink.json

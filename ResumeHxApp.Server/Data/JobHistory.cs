@@ -14,6 +14,9 @@ public class JobHistory
     public DateTime? EndDate { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+
+    // Navigation
+    public ICollection<JobResponsibility> Responsibilities { get; set; } = new List<JobResponsibility>();
 }
 
 

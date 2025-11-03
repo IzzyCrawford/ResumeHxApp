@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ResumeHxApp.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3729e00e6b37eb2fec31ee90ec02deb7cd184a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ResumeHxApp.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ResumeHxApp.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

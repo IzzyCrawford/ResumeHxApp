@@ -20,10 +20,11 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Resume>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.FullName).IsRequired().HasMaxLength(20);
-            entity.Property(e => e.Email).IsRequired().HasMaxLength(20);
-            entity.Property(e => e.Phone).HasMaxLength(20);
-            entity.Property(e => e.Summary).HasMaxLength(2000);
+            entity.Property(e => e.FullName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Email).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Phone).HasMaxLength(50);
+            entity.Property(e => e.LinkedInProfile).HasMaxLength(500);
+            entity.Property(e => e.Summary).HasMaxLength(5000);
             entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
         });
@@ -42,16 +43,18 @@ public class ApplicationDbContext : DbContext
             entity.Property(e => e.UpdatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             entity.HasOne<Resume>()
-                  .WithMany()
+                  .WithMany(r => r.JobHistories)
                   .HasForeignKey(e => e.ResumeId)
                   .OnDelete(DeleteBehavior.Cascade);
         });
+
         modelBuilder.Entity<JobResponsibility>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Description).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(1000);
+
             entity.HasOne<JobHistory>()
-                  .WithMany()
+                  .WithMany(j => j.Responsibilities)
                   .HasForeignKey(e => e.JobHistoryId)
                   .OnDelete(DeleteBehavior.Cascade);
         });

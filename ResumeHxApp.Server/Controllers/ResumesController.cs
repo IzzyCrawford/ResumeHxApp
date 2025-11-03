@@ -20,13 +20,19 @@ public class ResumesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Resume>>> GetResumes()
     {
-        return await _context.Resumes.ToListAsync();
+        return await _context.Resumes
+            .Include(r => r.JobHistories)
+            .ThenInclude(j => j.Responsibilities)
+            .ToListAsync();
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Resume>> GetResume(int id)
     {
-        var resume = await _context.Resumes.FindAsync(id);
+        var resume = await _context.Resumes
+            .Include(r => r.JobHistories)
+            .ThenInclude(j => j.Responsibilities)
+            .FirstOrDefaultAsync(r => r.Id == id);
 
         if (resume == null)
         {

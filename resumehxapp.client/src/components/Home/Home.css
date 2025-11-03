@@ -72,6 +72,51 @@
     justify-content: flex-start;
 }
 
+/* CTA Buttons */
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.cta-button.primary {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    color: white;
+    box-shadow: 0 2px 4px rgba(30, 58, 95, 0.3);
+}
+
+.cta-button.primary:hover {
+    background: linear-gradient(135deg, #2c5282 0%, #1e3a5f 100%);
+    box-shadow: 0 4px 8px rgba(30, 58, 95, 0.4);
+    transform: translateY(-2px);
+}
+
+.cta-button.secondary {
+    background: white;
+    color: #1e3a5f;
+    border: 2px solid #1e3a5f;
+}
+
+.cta-button.secondary:hover {
+    background: #1e3a5f;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(30, 58, 95, 0.3);
+}
+
 /* Layout: stack on small screens, side-by-side on larger */
 @media (min-width: 900px) {
     .home-columns {

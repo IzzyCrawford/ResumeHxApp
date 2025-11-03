@@ -11,6 +11,7 @@ const Navigation: React.FC = () => {
                 </div>
                 <div className="nav-links">
                     <Link to="/" className="nav-link">Home</Link>
+                    <Link to="/resume" className="nav-link">Resume</Link>
                     <Link to="/forecast" className="nav-link">Weather Forecast</Link>
                 </div>
             </div>

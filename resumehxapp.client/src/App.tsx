@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import WeatherForecast from './components/Forecast/Forecast';
+import Resume from './components/Resume/Resume';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/forecast" element={<WeatherForecast />} />
+                        <Route path="/resume" element={<Resume />} />
                     </Routes>
                 </main>
             </div>

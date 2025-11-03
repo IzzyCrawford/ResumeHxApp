@@ -21,255 +21,155 @@ public static class DbSeeder
                 Email = "israel.crawford2011@gmail.com",
                 Phone = "(801) 309-6983",
                 LinkedInProfile = "https://linkedin.com/in/israel-crawford-b9874960",
-                Summary = "Experienced Full-Stack Developer with 10+ years building scalable web applications. Proficient in React, .NET Core, and PostgreSQL. Strong focus on clean code and agile methodologies.",
+                Summary = "Army veteran and results-driven software engineer and analyst with 10+ years of experience developing, testing, and optimizing software solutions while analyzing complex systems to improve performance and functionality. Skilled in full-stack development, data analysis, and software lifecycle management with a proven record of delivering scalable applications that enhance efficiency and reduce costs. Adept at collaborating with cross-functional teams, implementing agile methodologies, and ensuring solutions align with organizational objectives. Seeking to leverage technical expertise, analytical background, and leadership skills to excel as a Senior Software Engineer.",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             }
         };
 
+        context.Resumes.AddRange(resumes);
+        context.SaveChanges(); // Save resumes first to get their IDs
+        
+        var resume = context.Resumes.First();
+        
         // Add sample job histories
         var jobHistories = new List<JobHistory>
         {
             new JobHistory
             {
-                ResumeId = 1,
+                ResumeId = resume.Id,
                 CompanyName = "Robbins Gioia",
                 Location = "Hill Afb, UT",
                 JobTitle = "Systems Analyst",
-                StartDate = new DateTime(2014, 3, 1),
-                EndDate = new DateTime(2015, 7, 30),
+                StartDate = new DateTime(2014, 3, 1, 0, 0, 0, DateTimeKind.Utc),
+                EndDate = new DateTime(2015, 7, 30, 0, 0, 0, DateTimeKind.Utc),
                 TechStack = "Visual Studios, Team Foundation Server, Win Forms, WPF, C#/ASP.NET MVC, JQuery, Oracle DB, SQL Server",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             },
             new JobHistory
             {
-                ResumeId = 1,
+                ResumeId = resume.Id,
                 CompanyName = "Database Solution, INC",
                 Location = "Mobile, AL",
                 JobTitle = "DevOps Support Analyst",
                 TechStack = "Visual Studios, Jira, C#/ASP.NET MVC, Ext JS, Mirth Connect, Graylog, SQL Server, Postgres",
-                StartDate = new DateTime(2015, 12, 1),
-                EndDate = new DateTime(2017, 12, 30),
+                StartDate = new DateTime(2015, 12, 1, 0, 0, 0, DateTimeKind.Utc),
+                EndDate = new DateTime(2017, 12, 30, 0, 0, 0, DateTimeKind.Utc),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             },
             new JobHistory
             {
-                ResumeId = 1,
+                ResumeId = resume.Id,
                 CompanyName = "Rural Sourcing, INC",
                 Location = "Mobile, AL",
                 JobTitle = "Analyst/Consultant promoted to Analyst/Consultant II",
                 TechStack = "Visual Studios, Jira, Team Foundation Server, RESTful Service, Entity Framework 6, React, Angular 7, Azure DevOps, CouchDB, C#, ASP.NET MVC, PostgreSQL",
-                StartDate = new DateTime(2018, 1, 1),
-                EndDate = new DateTime(2020, 9, 1),
+                StartDate = new DateTime(2018, 1, 1, 0, 0, 0, DateTimeKind.Utc),
+                EndDate = new DateTime(2020, 9, 1, 0, 0, 0, DateTimeKind.Utc),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             },
             new JobHistory
             {
-                ResumeId = 1,
+                ResumeId = resume.Id,
                 CompanyName = "Trustedi10 - Abeo - Ventra",
                 Location = "Dallas, TX - Remote",
                 JobTitle = "Senior Software Engineer",
                 TechStack = "Visual Studios, Jira, RESTful Services, C#, ASP.NET MVC, MySQL, Python",
-                StartDate = new DateTime(2020, 9, 1),
-                EndDate = new DateTime(2022, 2, 1),
+                StartDate = new DateTime(2020, 9, 1, 0, 0, 0, DateTimeKind.Utc),
+                EndDate = new DateTime(2022, 2, 1, 0, 0, 0, DateTimeKind.Utc),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             },
             new JobHistory
             {
-                ResumeId = 1,
+                ResumeId = resume.Id,
                 CompanyName = "Cuna Mutual Group",
                 Location = "Madison, WI - Remote",
-                JobTitle = "Full-Stack Developer",
+                JobTitle = "Application Analyst IV",
                 TechStack = "Visual Studios, Jira, RESTful Service, Entity Framework Core, Azure DevOps, C#, ASP.NET Core, SQLServer, Service Bus",
-                StartDate = new DateTime(2022, 2, 1),
-                EndDate = new DateTime(2025, 7, 30),
+                StartDate = new DateTime(2022, 2, 1, 0, 0, 0, DateTimeKind.Utc),
+                EndDate = new DateTime(2025, 7, 30, 0, 0, 0, DateTimeKind.Utc),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow
             }
         };
 
-        // Add sample job responsibilities
-        var jobResponsibilities = new List<JobResponsibility>
-        {
-             new JobResponsibility
-            {
-                JobHistoryId = 1,
-                Description = "Supported U.S. Air Force Complex for Enhancement of PDMSS web based automated solutions and reports."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 1,
-                Description = "Provided data mining and analysis of data."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 1,
-                Description = "Utilized problem solving and debugging skills using structured, methodical approach using C#/ASP.NET. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 1,
-                Description = "Reviewed project plans to coordinate project activities between clients and developers."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 1,
-                Description = "Communicated major and minor bug fixes and upgrades."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Upgraded clients in production to the latest version of the software."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Utilized C#/ASP.NET skills to confirm bugs across multiple versions of software for enhancement."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Assisted with the development of products to resolve bugs."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Provided data mining using SQL Server 2012 and Postgres. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Conferred with organizational members to accomplish work activities and escalate issues to vendors for additional support."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Reviewed project plans to coordinate project activities between clients and developers."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 2,
-                Description = "Arranged deployments of minor and major fixes to database systems to increase the productivity of clients."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Assigned to work multiple client and internal roles as a developer for companies like UPS, Cayuse, DealerRater, SSI Group."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Prototyped and evaluated alternative designs in light of security, reliability, continuity and functional completeness."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Developed full-stack web applications which processed, analyzed, and rendered data visually for the Tech Tuesday App and the Project Managers Dashboards App."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Conferred with organizational members to accomplish work activities and establish priorities for features. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Used Entity objects such as Data Reader, Dataset and Data Adapter, for consistent access to SQL data sources."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Planned, wrote, and debugged web applications and software with complete accuracy."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Implement improvements in the design of existing software architecture. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Performed extensive development for applications Unit Testing/Validation Testing."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Coached junior developers in weekly one-on-one sessions, setting professional goals and providing constructive feedback to enhance their problem-solving abilities and code quality."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 3,
-                Description = "Performed extensive development for applications Unit Testing/Validation Testing."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 4,
-                Description = "Gathered requirements, getting sign-off from the business users and prepared system requirements specification for the solution."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 4,
-                Description = "Assisting with development of the ETL Engine used to process/strip data out of pdf files for patient medical records. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 4,
-                Description = "Assisting with development of the used to token medical records to process and find key terms to help Medical billers/coders."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Assisted with development and deployment for TruStage Products. "
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Assisted with the retirement of BizTalk application from PXA workflow."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Conducted expert-level analysis and design to translate business needs into technical specifications, enhancing solution delivery."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Guided the development of multiple concurrent business systems, providing leadership and architectural guidance to Scrum teams."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Proactively identified and communicated process improvements, resulting in increased efficiency across IT and business operations."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Developed and maintained high-quality business systems solutions, ensuring adherence to established methodologies and practices."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Enhanced application development practices by acquiring and sharing knowledge of new technologies and methodologies."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Conducted root cause analysis and problem resolution, ensuring timely responses to customer requests."
-            },
-            new JobResponsibility
-            {
-                JobHistoryId = 5,
-                Description = "Collaborated with IT and business teams to drive impactful changes across organizational units."
-            }
-        };
-
-        context.Resumes.AddRange(resumes);
         context.JobHistories.AddRange(jobHistories);
-        context.JobResponsibilities.AddRange(jobResponsibilities);
         context.SaveChanges();
+
+        // Create job responsibilities linked by JobHistoryId
+        var responsibilities = new List<JobResponsibility>();
+        foreach (var job in context.JobHistories.Where(j => j.ResumeId == resume.Id).ToList())
+        {
+            if (job.CompanyName == "Robbins Gioia")
+            {
+                responsibilities.AddRange(new[]
+                {
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Supported USAF PDMSS web-based solutions for Hill AFB." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Integrated multiple legacy systems with modern enterprise platforms to streamline data exchange and improve organizational workflow." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Consolidated reporting processes by linking disparate databases, increasing data accessibility and efficiency for cross-departmental projects." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Upgraded system integration protocols at Robbins Gioia, enabling seamless interoperability between critical business applications and reducing process redundancies acrossdepartments." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Performed data mining and analysis and Debugged C#/ASP.NET apps using structured methods." }
+                });
+            }
+            else if (job.CompanyName == "Database Solution, INC")
+            {
+                responsibilities.AddRange(new[]
+                {
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Troubleshoot AccuReg workflow from client hospitals to vendors, resolving data issues and providing network connectivity for HL7 interfaces." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Data analysis for client and vendor EDI connections including EDI 837, EDI 835, EDI 270/271, EDI 275, EDI 276/277, and EDI 278." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Streamlined deployment pipelines by configuring automation scripts and implementing solutions, facilitating reliable and efficient software releases across development environments." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Upgraded monitoring and alerting frameworks within revenue cycle management solutions, deploying automated remediation scripts to minimize system disruptions and uphold high availability for mission-critical healthcare applications." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Authored advanced SQL queries for data analysis. (SQL Server/Postgres)" }
+                });
+            }
+            else if (job.CompanyName == "Rural Sourcing, INC")
+            {
+                responsibilities.AddRange(new[]
+                {
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Task as a mid-level and senior developer on various client projects, clients included UPS, DealerRater, Cayuse, SSI Group, and Internal Projects." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Built full-stack web applications for multiple client projects." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Evaluated client systems and workflows, delivering targeted process enhancements that strengthened operational reliability and supported measurable business outcomes." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Interpreted complex datasets to identify process gaps, providing actionable recommendations that strengthened project outcomes and enhanced client satisfaction." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Mapped large-scale data processes and documented workflow dependencies, enabling more accurate forecasting and prioritization for diverse client portfolios." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Compiled and synthesized cross-departmental data sources, delivering unified analytical models that supported real-time decision-making for high-impact client projects." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Engineered interactive dashboards using web development tools (JavaScript, HTML5, CSS3) to streamline real-time visualization for 5+ client-facing reports monthly." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Developed and integrated RESTful API solutions using C#, and Postman to automate data exchange across 5+ client systems." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Integrated automated data validation routines into existing workflows, elevating report reliability and minimizing manual intervention for client deliverables." }
+                });
+            }
+            else if (job.CompanyName == "Trustedi10 - Abeo - Ventra")
+            {
+                responsibilities.AddRange(new[]
+                {
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Developed the ETL Engine for processing patient medical records from pdf files, ensuring data accuracy and efficiency." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Tokenized medical records to identify key terms for medical billers/coders, improving workflow efficiency." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Refined existing ETL and NLP components by integrating modular design principles, boosting maintainability and enabling swift adaptation to complex patient data processing demands at TRUSTEDi10." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Participate in collaborative software development practices, particularly performing merge request reviews, providing design feedback, etc." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Devised automated data validation routines that increased the accuracy and consistency of patient records processed through TRUSTEDi10's ETL workflows." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Integrated robust logging and monitoring solutions to track data pipeline health and facilitate rapid issue diagnosis, contributing to increased operational reliability at TRUSTEDi10." }
+                });
+            }
+            else if (job.CompanyName == "Cuna Mutual Group")
+            {
+                responsibilities.AddRange(new[]
+                {
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Team Contact for TruStage Products Execution Area." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Unified legacy and modernized applications by integrating APIs and middleware solutions, reinforcing scalability, security, and interoperability across critical business platforms." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Refined data migration strategies by leveraging advanced ETL tools (ADF) to ensure seamless transitions between legacy and cloud-based systems, minimizing business disruption and ensuring data integrity for mission-critical applications." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Advanced system reliability by deploying real-time monitoring solutions, enabling immediate detection and resolution of critical application incidents across enterprise environments." },
+                    new JobResponsibility { JobHistoryId = job.Id, Description = "Retired BizTalk integration in PXA workflows" },
+                });
+            }
+        }
+
+        if (responsibilities.Count > 0)
+        {
+            context.JobResponsibilities.AddRange(responsibilities);
+            context.SaveChanges();
+        }
     }
 }

@@ -1,0 +1,6 @@
+@ResumeHxApp.Server_HostAddress = http://localhost:5083
+
+GET {{ResumeHxApp.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

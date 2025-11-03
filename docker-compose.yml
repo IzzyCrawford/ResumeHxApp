@@ -1,0 +1,50 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: resumehxuser
+      POSTGRES_PASSWORD: resumehxpass
+      POSTGRES_DB: resumehxdb
+    ports:
+      - "5432:5432"
+    networks:
+      - resumehx-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U resumehxuser"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: ResumeHxApp.Server/Dockerfile
+    ports:
+      - "5000:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+      - CORS_ORIGINS=http://localhost:3000,http://frontend:3000
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=resumehxdb;Username=resumehxuser;Password=resumehxpass
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - resumehx-network
+
+  frontend:
+    build:
+      context: ./resumehxapp.client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_HOST=http://backend:8080
+    depends_on:
+      - backend
+    networks:
+      - resumehx-network
+
+networks:
+  resumehx-network:
+    driver: bridge

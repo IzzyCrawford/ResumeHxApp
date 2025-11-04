@@ -1,0 +1,95 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: orderprocessing-postgres
+    environment:
+      POSTGRES_DB: orderprocessing
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  rabbitmq:
+    image: rabbitmq:4.0-management-alpine
+    container_name: orderprocessing-rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"   # AMQP
+      - "15672:15672" # Management UI
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./order-processing/src/OrderProcessing.Api
+      dockerfile: Dockerfile
+    container_name: orderprocessing-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=orderprocessing;Username=postgres;Password=postgres"
+      MassTransit__Transport: "RabbitMQ"
+      MassTransit__RabbitMQ__Host: "rabbitmq"
+      MassTransit__RabbitMQ__Username: "guest"
+      MassTransit__RabbitMQ__Password: "guest"
+    ports:
+      - "5001:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  worker:
+    build:
+      context: ./order-processing/src/OrderProcessing.Worker
+      dockerfile: Dockerfile
+    container_name: orderprocessing-worker
+    environment:
+      DOTNET_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=orderprocessing;Username=postgres;Password=postgres"
+      MassTransit__Transport: "RabbitMQ"
+      MassTransit__RabbitMQ__Host: "rabbitmq"
+      MassTransit__RabbitMQ__Username: "guest"
+      MassTransit__RabbitMQ__Password: "guest"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  adminapi:
+    build:
+      context: ./order-processing/src/OrderProcessing.AdminApi
+      dockerfile: Dockerfile
+    container_name: orderprocessing-adminapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=orderprocessing;Username=postgres;Password=postgres"
+      MassTransit__Transport: "RabbitMQ"
+      MassTransit__RabbitMQ__Host: "rabbitmq"
+      MassTransit__RabbitMQ__Username: "guest"
+      MassTransit__RabbitMQ__Password: "guest"
+    ports:
+      - "5002:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

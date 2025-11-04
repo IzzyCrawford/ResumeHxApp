@@ -1,0 +1,12 @@
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\bin\Debug\net9.0\OrderProcessing.Contracts.deps.json
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\bin\Debug\net9.0\OrderProcessing.Contracts.dll
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\bin\Debug\net9.0\OrderProcessing.Contracts.pdb
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.AssemblyInfoInputs.cache
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.AssemblyInfo.cs
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.sourcelink.json
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.dll
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\refint\OrderProcessing.Contracts.dll
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\OrderProcessing.Contracts.pdb
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.Contracts\obj\Debug\net9.0\ref\OrderProcessing.Contracts.dll

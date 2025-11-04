@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import './Resume.css';
 
 interface JobHistory {
@@ -36,6 +36,22 @@ const Resume: React.FC = () => {
     const [jobHistories, setJobHistories] = useState<JobHistory[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [showModal, setShowModal] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
+    const [formError, setFormError] = useState<string | null>(null);
+
+    const initialForm = useMemo(() => ({
+        companyName: '',
+        jobTitle: '',
+        location: '',
+        techStack: '',
+        summary: '',
+        startDate: '',
+        endDate: ''
+    }), []);
+    const [form, setForm] = useState(initialForm);
+    const [responsibilities, setResponsibilities] = useState<string[]>([]);
+    const [responsibilityInput, setResponsibilityInput] = useState('');
 
     useEffect(() => {
         populateResumeData();
@@ -108,6 +124,9 @@ const Resume: React.FC = () => {
 
                         <div className="main-section">
                             <h2 className="section-heading">WORK EXPERIENCE</h2>
+                            <div className="section-actions">
+                                <button className="add-experience-btn" onClick={() => setShowModal(true)}>+ Add Work Experience</button>
+                            </div>
                             {jobHistories.length > 0 ? (
                                 jobHistories.map(job => (
                                     <div key={job.id} className="job-entry">
@@ -157,6 +176,82 @@ const Resume: React.FC = () => {
     return (
         <div className="resume-page">
             {contents}
+            {showModal && (
+                <div className="modal-overlay" role="dialog" aria-modal="true">
+                    <div className="modal">
+                        <div className="modal-header">
+                            <h3>Add Work Experience</h3>
+                            <button className="icon-button" onClick={handleClose}>✕</button>
+                        </div>
+                        <div className="modal-body">
+                            {formError && <div className="form-error">{formError}</div>}
+                            <div className="form-grid">
+                                <div className="form-group">
+                                    <label htmlFor="companyName">Company Name<span className="req">*</span></label>
+                                    <input id="companyName" type="text" placeholder="Acme Corp" value={form.companyName} onChange={e => setForm({ ...form, companyName: e.target.value })} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="jobTitle">Job Title<span className="req">*</span></label>
+                                    <input id="jobTitle" type="text" placeholder="Senior Developer" value={form.jobTitle} onChange={e => setForm({ ...form, jobTitle: e.target.value })} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="location">Location</label>
+                                    <input id="location" type="text" placeholder="City, State" value={form.location} onChange={e => setForm({ ...form, location: e.target.value })} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="techStack">Tech Stack</label>
+                                    <input id="techStack" type="text" placeholder="React, .NET, Postgres" value={form.techStack} onChange={e => setForm({ ...form, techStack: e.target.value })} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="startDate">Start Date<span className="req">*</span></label>
+                                    <input id="startDate" type="date" placeholder="YYYY-MM" value={form.startDate} onChange={e => setForm({ ...form, startDate: e.target.value })} />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="endDate">End Date</label>
+                                    <input id="endDate" type="date" placeholder="YYYY-MM" value={form.endDate} onChange={e => setForm({ ...form, endDate: e.target.value })} />
+                                </div>
+                                <div className="form-group full">
+                                    <label htmlFor="summary">Summary</label>
+                                    <textarea id="summary" rows={2} placeholder="Brief overview of the role" value={form.summary} onChange={e => setForm({ ...form, summary: e.target.value })} />
+                                </div>
+                                <div className="form-group full">
+                                    <label htmlFor="responsibilityInput">Responsibilities</label>
+                                    <div className="chip-input-container">
+                                        <input
+                                            id="responsibilityInput"
+                                            type="text"
+                                            placeholder="e.g., Delivered feature X"
+                                            value={responsibilityInput}
+                                            onChange={e => setResponsibilityInput(e.target.value)}
+                                            onKeyDown={e => {
+                                                if (e.key === 'Enter') {
+                                                    e.preventDefault();
+                                                    handleAddResponsibility();
+                                                }
+                                            }}
+                                        />
+                                        <button type="button" className="btn chip-add-btn" onClick={handleAddResponsibility}>Add</button>
+                                    </div>
+                                    {responsibilities.length > 0 && (
+                                        <div className="chip-list">
+                                            {responsibilities.map((resp, idx) => (
+                                                <div key={idx} className="chip">
+                                                    <span>{resp}</span>
+                                                    <button type="button" className="chip-remove" onClick={() => handleRemoveResponsibility(idx)}>✕</button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-actions">
+                            <button className="btn secondary" onClick={handleClose} disabled={submitting}>Cancel</button>
+                            <button className="btn primary" onClick={handleSubmit} disabled={submitting}>{submitting ? 'Saving…' : 'Save'}</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 
@@ -194,6 +289,80 @@ const Resume: React.FC = () => {
             console.error('Error fetching resume data:', error);
             setError('Failed to load resume data. Please try again later.');
             setLoading(false);
+        }
+    }
+
+    function handleClose() {
+        if (submitting) return;
+        setShowModal(false);
+        setForm(initialForm);
+        setResponsibilities([]);
+        setResponsibilityInput('');
+        setFormError(null);
+    }
+
+    function handleAddResponsibility() {
+        const trimmed = responsibilityInput.trim();
+        if (!trimmed) return;
+        setResponsibilities([...responsibilities, trimmed]);
+        setResponsibilityInput('');
+    }
+
+    function handleRemoveResponsibility(index: number) {
+        setResponsibilities(responsibilities.filter((_, i) => i !== index));
+    }
+
+    async function handleSubmit() {
+        if (!resume) return;
+        setFormError(null);
+        // Basic validation
+        if (!form.companyName.trim() || !form.jobTitle.trim() || !form.startDate) {
+            setFormError('Company, Job Title, and Start Date are required.');
+            return;
+        }
+
+        const startDateIso = new Date(form.startDate + 'T00:00:00Z').toISOString();
+        const endDateIso = form.endDate ? new Date(form.endDate + 'T00:00:00Z').toISOString() : null;
+
+        const payload = {
+            companyName: form.companyName.trim(),
+            jobTitle: form.jobTitle.trim(),
+            location: form.location.trim(),
+            techStack: form.techStack.trim(),
+            summary: form.summary.trim(),
+            startDate: startDateIso,
+            endDate: endDateIso,
+            responsibilities
+        };
+
+        try {
+            setSubmitting(true);
+            const res = await fetch(`/api/resumes/${resume.id}/jobs`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(`Save failed: ${res.status} ${text}`);
+            }
+            const created: JobHistory = await res.json();
+            const updated = [created, ...jobHistories];
+            const sorted = [...updated].sort((a, b) => {
+                const endA = a.endDate ? new Date(a.endDate).getTime() : Number.POSITIVE_INFINITY;
+                const endB = b.endDate ? new Date(b.endDate).getTime() : Number.POSITIVE_INFINITY;
+                if (endA !== endB) return endB - endA;
+                const startA = new Date(a.startDate).getTime();
+                const startB = new Date(b.startDate).getTime();
+                return startB - startA;
+            });
+            setJobHistories(sorted);
+            handleClose();
+        } catch (err: any) {
+            console.error(err);
+            setFormError(err.message || 'Something went wrong.');
+        } finally {
+            setSubmitting(false);
         }
     }
 };

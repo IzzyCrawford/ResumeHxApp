@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj": {}
+    "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj": {
+    "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj",
+        "projectUniqueName": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj",
         "projectName": "ResumeHxApp.Server",
-        "projectPath": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj",
+        "projectPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\ResumeHxApp.Server.csproj",
         "packagesPath": "C:\\Users\\Izzy-PC\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\obj\\",
+        "outputPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\ResumeHxApp.Server\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

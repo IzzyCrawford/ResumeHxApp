@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ResumeHxApp.Server.Data;
+using ResumeHxApp.Server.Models;
 
 namespace ResumeHxApp.Server.Controllers;
 
@@ -99,5 +100,51 @@ public class ResumesController : ControllerBase
     private async Task<bool> ResumeExists(int id)
     {
         return await _context.Resumes.AnyAsync(e => e.Id == id);
+    }
+
+    // POST: api/resumes/{id}/jobs
+    [HttpPost("{id}/jobs")]
+    public async Task<ActionResult<JobHistory>> AddJobHistory(int id, [FromBody] CreateJobHistoryRequest request)
+    {
+        var resume = await _context.Resumes.FindAsync(id);
+        if (resume == null)
+        {
+            return NotFound();
+        }
+
+        var job = new JobHistory
+        {
+            ResumeId = id,
+            CompanyName = request.CompanyName,
+            Location = request.Location ?? string.Empty,
+            JobTitle = request.JobTitle,
+            TechStack = request.TechStack ?? string.Empty,
+            Summary = request.Summary ?? string.Empty,
+            StartDate = DateTime.SpecifyKind(request.StartDate, DateTimeKind.Utc),
+            EndDate = request.EndDate.HasValue ? DateTime.SpecifyKind(request.EndDate.Value, DateTimeKind.Utc) : null,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        if (request.Responsibilities != null && request.Responsibilities.Count > 0)
+        {
+            foreach (var desc in request.Responsibilities.Where(s => !string.IsNullOrWhiteSpace(s)))
+            {
+                job.Responsibilities.Add(new JobResponsibility
+                {
+                    Description = desc.Trim()
+                });
+            }
+        }
+
+        _context.JobHistories.Add(job);
+        await _context.SaveChangesAsync();
+
+        // Reload with responsibilities for return payload
+        var created = await _context.JobHistories
+            .Include(j => j.Responsibilities)
+            .FirstOrDefaultAsync(j => j.Id == job.Id);
+
+        return CreatedAtAction(nameof(GetResume), new { id = resume.Id }, created);
     }
 }

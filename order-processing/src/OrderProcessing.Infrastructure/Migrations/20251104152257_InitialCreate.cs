@@ -182,7 +182,7 @@ namespace OrderProcessing.Infrastructure.Migrations
                 table: "Orders",
                 columns: new[] { "IdempotencyKey", "CustomerId" },
                 unique: true,
-                filter: "[IdempotencyKey] IS NOT NULL");
+                filter: "\"IdempotencyKey\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_Status_CreatedAt",
@@ -198,14 +198,14 @@ namespace OrderProcessing.Infrastructure.Migrations
                 name: "IX_OutboxMessages_PublishedAt",
                 table: "OutboxMessages",
                 column: "PublishedAt",
-                filter: "[PublishedAt] IS NULL");
+                filter: "\"PublishedAt\" IS NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_IntentId",
                 table: "Payments",
                 column: "IntentId",
                 unique: true,
-                filter: "[IntentId] IS NOT NULL");
+                filter: "\"IntentId\" IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Payments_OrderId",

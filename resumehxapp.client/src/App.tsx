@@ -4,6 +4,7 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './components/Home/Home';
 import WeatherForecast from './components/Forecast/Forecast';
 import Resume from './components/Resume/Resume';
+import { OrdersPage } from './components/Orders';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/forecast" element={<WeatherForecast />} />
                         <Route path="/resume" element={<Resume />} />
+                        <Route path="/orders" element={<OrdersPage />} />
                     </Routes>
                 </main>
             </div>

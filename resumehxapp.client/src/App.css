@@ -1,8 +1,7 @@
 ﻿#root {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
+    padding: 1rem;
 }
 .app {
     min-height: 100vh;
@@ -14,6 +13,7 @@
 .main-content {
     flex: 1;
     width: 100%;
+    padding-top: 0.5rem;
 }
 th, td {
     padding-left: 1rem;

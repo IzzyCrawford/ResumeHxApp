@@ -13,6 +13,7 @@ const Navigation: React.FC = () => {
                     <Link to="/" className="nav-link">Home</Link>
                     <Link to="/resume" className="nav-link">Resume</Link>
                     <Link to="/forecast" className="nav-link">Weather Forecast</Link>
+                    <Link to="/orders" className="nav-link">Orders</Link>
                 </div>
             </div>
         </nav>

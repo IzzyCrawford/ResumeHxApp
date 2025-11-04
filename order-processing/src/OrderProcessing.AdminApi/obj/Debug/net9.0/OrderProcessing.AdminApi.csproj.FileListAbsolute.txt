@@ -67,3 +67,4 @@ C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.A
 C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.AdminApi\obj\Debug\net9.0\OrderProcessing.AdminApi.pdb
 C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.AdminApi\obj\Debug\net9.0\OrderProcessing.AdminApi.genruntimeconfig.cache
 C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.AdminApi\obj\Debug\net9.0\ref\OrderProcessing.AdminApi.dll
+C:\Users\Izzy-PC\source\repos\ResumeHxApp\order-processing\src\OrderProcessing.AdminApi\bin\Debug\net9.0\Microsoft.Extensions.Configuration.Binder.dll

@@ -207,13 +207,13 @@
       "Microsoft.EntityFrameworkCore.Analyzers/9.0.10": {
         "type": "package"
       },
-      "Microsoft.EntityFrameworkCore.Relational/9.0.1": {
+      "Microsoft.EntityFrameworkCore.Relational/9.0.10": {
         "type": "package",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "9.0.1",
-          "Microsoft.Extensions.Caching.Memory": "9.0.1",
-          "Microsoft.Extensions.Configuration.Abstractions": "9.0.1",
-          "Microsoft.Extensions.Logging": "9.0.1"
+          "Microsoft.EntityFrameworkCore": "9.0.10",
+          "Microsoft.Extensions.Caching.Memory": "9.0.10",
+          "Microsoft.Extensions.Configuration.Abstractions": "9.0.10",
+          "Microsoft.Extensions.Logging": "9.0.10"
         },
         "compile": {
           "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll": {
@@ -1144,6 +1144,8 @@
           "MassTransit.Azure.ServiceBus.Core": "8.5.5",
           "MassTransit.RabbitMQ": "8.5.5",
           "Microsoft.EntityFrameworkCore": "9.0.10",
+          "Microsoft.EntityFrameworkCore.Relational": "9.0.10",
+          "Microsoft.Extensions.Configuration.Binder": "9.0.10",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "OrderProcessing.Contracts": "1.0.0"
         },
@@ -1408,10 +1410,10 @@
         "microsoft.entityframeworkcore.analyzers.nuspec"
       ]
     },
-    "Microsoft.EntityFrameworkCore.Relational/9.0.1": {
-      "sha512": "7Iu0h4oevRvH4IwPzmxuIJGYRt55TapoREGlluk75KCO7lenN0+QnzCl6cQDY48uDoxAUpJbpK2xW7o8Ix69dw==",
+    "Microsoft.EntityFrameworkCore.Relational/9.0.10": {
+      "sha512": "IJNrG5vdmFUvHR8FLLFg9AWpuE8qW1DTEN+fNLGbNTu6cnpZzzqU6+aknAGtTSAEVWosJ3BZ3TOO9wpifUvv3A==",
       "type": "package",
-      "path": "microsoft.entityframeworkcore.relational/9.0.1",
+      "path": "microsoft.entityframeworkcore.relational/9.0.10",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1419,7 +1421,7 @@
         "PACKAGE.md",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net8.0/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.9.0.1.nupkg.sha512",
+        "microsoft.entityframeworkcore.relational.9.0.10.nupkg.sha512",
         "microsoft.entityframeworkcore.relational.nuspec"
       ]
     },
@@ -2736,6 +2738,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Microsoft.EntityFrameworkCore.Relational >= 9.0.10",
       "Microsoft.Extensions.Hosting >= 9.0.10",
       "OrderProcessing.Contracts >= 1.0.0",
       "OrderProcessing.Infrastructure >= 1.0.0"
@@ -2748,11 +2751,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\OrderProcessing.Worker.csproj",
+      "projectUniqueName": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\OrderProcessing.Worker.csproj",
       "projectName": "OrderProcessing.Worker",
-      "projectPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\OrderProcessing.Worker.csproj",
+      "projectPath": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\OrderProcessing.Worker.csproj",
       "packagesPath": "C:\\Users\\Izzy-PC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\obj\\",
+      "outputPath": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Worker\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -2777,8 +2780,8 @@
             "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Contracts\\OrderProcessing.Contracts.csproj": {
               "projectPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Contracts\\OrderProcessing.Contracts.csproj"
             },
-            "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Infrastructure\\OrderProcessing.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Infrastructure\\OrderProcessing.Infrastructure.csproj"
+            "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Infrastructure\\OrderProcessing.Infrastructure.csproj": {
+              "projectPath": "c:\\Users\\Izzy-PC\\source\\repos\\ResumeHxApp\\order-processing\\src\\OrderProcessing.Infrastructure\\OrderProcessing.Infrastructure.csproj"
             }
           }
         }
@@ -2799,6 +2802,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": {
+            "target": "Package",
+            "version": "[9.0.10, )"
+          },
           "Microsoft.Extensions.Hosting": {
             "target": "Package",
             "version": "[9.0.10, )"

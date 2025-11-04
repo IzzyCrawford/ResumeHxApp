@@ -33,8 +33,8 @@ services:
 
   api:
     build:
-      context: ./order-processing/src/OrderProcessing.Api
-      dockerfile: Dockerfile
+      context: ./order-processing
+      dockerfile: src/OrderProcessing.Api/Dockerfile
     container_name: orderprocessing-api
     environment:
       ASPNETCORE_ENVIRONMENT: Development
@@ -54,8 +54,8 @@ services:
 
   worker:
     build:
-      context: ./order-processing/src/OrderProcessing.Worker
-      dockerfile: Dockerfile
+      context: ./order-processing
+      dockerfile: src/OrderProcessing.Worker/Dockerfile
     container_name: orderprocessing-worker
     environment:
       DOTNET_ENVIRONMENT: Development
@@ -72,8 +72,8 @@ services:
 
   adminapi:
     build:
-      context: ./order-processing/src/OrderProcessing.AdminApi
-      dockerfile: Dockerfile
+      context: ./order-processing
+      dockerfile: src/OrderProcessing.AdminApi/Dockerfile
     container_name: orderprocessing-adminapi
     environment:
       ASPNETCORE_ENVIRONMENT: Development
@@ -90,6 +90,35 @@ services:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
+
+  # ResumeHxApp ASP.NET Core backend (used by SPA nginx proxy for weather/api)
+  backend:
+    build:
+      context: ./
+      dockerfile: ResumeHxApp.Server/Dockerfile
+    container_name: resumehxapp-backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+    ports:
+      - "5083:8080"  # Optional host access; SPA proxies to service name 'backend' internally
+    depends_on:
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+
+  # Frontend SPA served by nginx on port 3000
+  frontend:
+    build:
+      context: ./resumehxapp.client
+      dockerfile: Dockerfile
+    container_name: resumehxapp-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_started
 
 volumes:
   postgres_data:
